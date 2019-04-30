@@ -1,7 +1,16 @@
 public class MyHeap {
   private static void pushDown(int[]data,int size,int index) {
-    if (index<0 || index>=size-1 || 2*index+1>=size) {
-
+    if (2*index+2<size || 2*index+1<size) {
+      int val = data[index];
+      if (data[2*index+1]>data[index] && data[2*index+1]>data[2*index+2]) {
+        data[index]=data[2*index+1];
+        data[2*index+1]=val;
+        pushDown(data,size,2*index+1);
+      } else if (data[2*index+2]>data[index] && data[2*index+2]>data[2*index+1]) {
+        data[index]=data[2*index+2];
+        data[2*index+2]=val;
+        pushDown(data,size,2*index+2);
+      }
     }
   }
 
